@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from './themes.js';
 
 import Header from "./components/header/Header";
+import Checklist from "./components/main/display/Checklist";
 
 function App() {
 
@@ -233,11 +234,35 @@ function createNewDay() {
 }
 
 
-useEffect(() => {
-  console.log(records)
-}, [records])
+// useEffect(() => {
+//   console.log(records)
+// }, [records])
 
 
+function completeHabit(updatedHabit) {
+  const updatedRecords = [...records];
+  const currentDay = updatedRecords[0];
+  const selectedHabit = currentDay.habits.find(habit => habit.id === updatedHabit.id);
+
+  selectedHabit.complete = !selectedHabit.complete;
+
+  setRecords(updatedRecords);
+}
+
+function updateHabitQuantity(updatedHabit, newAmt) {
+  const updatedRecords = [...records];
+  const currentDay = updatedRecords[0];
+  const selectedHabit = currentDay.habits.find(habit => habit.id === updatedHabit.id);
+
+  selectedHabit.goal.currentAmt = selectedHabit.goal.currentAmt + Number(newAmt);
+  if(selectedHabit.goal.currentAmt >= selectedHabit.goal.goalAmt) {
+    selectedHabit.complete = true;
+  } else {
+    selectedHabit.complete = false;
+  }
+
+  setRecords(updatedRecords);
+}
 
 
   return (
@@ -246,6 +271,10 @@ useEffect(() => {
       <GlobalStyles />
 
       <Header colorTheme={colorTheme} toggleTheme={toggleTheme} />
+
+      <main>
+        <Checklist currentDay={records[0]} completeHabit={completeHabit} updateHabitQuantity={updateHabitQuantity} />
+      </main>
 
     </>
     </ThemeProvider>
