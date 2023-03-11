@@ -7,6 +7,8 @@ import { lightTheme, darkTheme } from './themes.js';
 
 import Header from "./components/header/Header";
 import Checklist from "./components/main/display/Checklist";
+import History from "./components/main/display/History";
+import { StyledMain } from "./components/main/Main.styled";
 
 function App() {
 
@@ -272,9 +274,10 @@ function updateHabitQuantity(updatedHabit, newAmt) {
 
       <Header colorTheme={colorTheme} toggleTheme={toggleTheme} />
 
-      <main>
+      <StyledMain>
         <Checklist currentDay={records[0]} completeHabit={completeHabit} updateHabitQuantity={updateHabitQuantity} />
-      </main>
+        <History records={records} today={today} />
+      </StyledMain>
 
     </>
     </ThemeProvider>
