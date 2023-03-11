@@ -9,6 +9,7 @@ import Header from "./components/header/Header";
 import Checklist from "./components/main/display/Checklist";
 import History from "./components/main/display/History";
 import { StyledMain } from "./components/main/Main.styled";
+import HabitSetup from "./components/main/form/HabitSetup";
 
 function App() {
 
@@ -31,8 +32,6 @@ function App() {
     }
   }, [today])
 
-  
-
 // SET THEME
 const [colorTheme, setColorTheme] = useState('light');
 
@@ -44,6 +43,8 @@ const [colorTheme, setColorTheme] = useState('light');
     }
   }
 
+
+// HABITS LIST
   const [ habits, setHabits ] = useState([
       { 
         id: 1,
@@ -77,6 +78,13 @@ const [colorTheme, setColorTheme] = useState('light');
         goalAmt: 80,
       },
     ])
+
+    const [ setupFormActive, setSetupFormActive ] = useState(false);
+
+    function createHabitList(list) {
+      setHabits(list);
+      setSetupFormActive(false)
+    }
 
   const [ records, setRecords ] = useState([
     {
@@ -240,6 +248,11 @@ function createNewDay() {
 //   console.log(records)
 // }, [records])
 
+useEffect(() => {
+  createNewDay()
+  console.log(habits)
+}, [habits])
+
 
 function completeHabit(updatedHabit) {
   const updatedRecords = [...records];
@@ -267,6 +280,9 @@ function updateHabitQuantity(updatedHabit, newAmt) {
 }
 
 
+
+
+
   return (
     <ThemeProvider theme={colorTheme === 'light' ? lightTheme : darkTheme} >
     <>
@@ -275,6 +291,11 @@ function updateHabitQuantity(updatedHabit, newAmt) {
       <Header colorTheme={colorTheme} toggleTheme={toggleTheme} />
 
       <StyledMain>
+        <button onClick={() => setSetupFormActive(true)}>ADD HABIT</button>
+        {
+          setupFormActive && <HabitSetup habitList={habits} createHabitList={createHabitList} />
+        }
+        
         <Checklist currentDay={records[0]} completeHabit={completeHabit} updateHabitQuantity={updateHabitQuantity} />
         <History records={records} today={today} />
       </StyledMain>

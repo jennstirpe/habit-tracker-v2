@@ -1,4 +1,4 @@
-import { StyledChecklist } from "../styled/Checklist.styled"
+import { StyledChecklist } from "../styled/display/Checklist.styled"
 import { useState, useRef } from "react"
 
 export default function Checklist({ currentDay, completeHabit, updateHabitQuantity }) {

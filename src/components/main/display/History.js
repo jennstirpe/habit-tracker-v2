@@ -1,4 +1,4 @@
-import { StyledHistory } from "../styled/History.styled"
+import { StyledHistory } from "../styled/display/History.styled"
 
 export default function History({ records, today }) {
 
