@@ -9,7 +9,11 @@ export const StyledHabitSetup = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    margin: auto;
 
     h2 {
         margin: 1rem;

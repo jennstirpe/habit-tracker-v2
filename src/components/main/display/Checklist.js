@@ -1,7 +1,7 @@
 import { StyledChecklist } from "../styled/display/Checklist.styled"
 import { useState, useRef, useEffect } from "react"
 
-export default function Checklist({ currentDay, completeHabit, updateHabitQuantity }) {
+export default function Checklist({ currentDay, completeHabit, updateHabitQuantity, toggleStreaks, streaksActive }) {
 
     const [ quantityFormActive, setQuantityFormActive ] = useState(false);
     const [ activeHabit, setActiveHabit ] = useState({})
@@ -32,6 +32,12 @@ export default function Checklist({ currentDay, completeHabit, updateHabitQuanti
                 return <button onClick={() => handleUpdateRecord(habit)} className="checklist-habit" key={habit.id} style={!habit.complete ? {background: "gray"} : {background: `${habit.color}`}}>{habit.name}</button>
             })
         }
+
+        <button onClick={() => toggleStreaks()} className="checklist-streak-btn">
+            {
+                streaksActive ? "Close" : "Streaks"
+            }
+        </button>
 
         {
             quantityFormActive && (

@@ -339,7 +339,11 @@ function App() {
     setHabits([...habitsCopy])
   }
 
+  const [ streaksActive, setStreaksActive ] = useState(false);
 
+  function toggleStreaks() {
+      setStreaksActive(setStreaksActive => !setStreaksActive);
+  }
 
   return (
     <ThemeProvider theme={colorTheme === 'light' ? lightTheme : darkTheme} >
@@ -356,11 +360,14 @@ function App() {
           setupFormActive && <HabitSetup habitList={habits} createHabitList={createHabitList} setSetupFormActive={setSetupFormActive} />
         }
         
-        <Checklist currentDay={records[0]} completeHabit={completeHabit} updateHabitQuantity={updateHabitQuantity} />
+        <Checklist currentDay={records[0]} completeHabit={completeHabit} updateHabitQuantity={updateHabitQuantity} toggleStreaks={toggleStreaks} streaksActive={streaksActive} />
         
-        <Streaks habits={habits} />
+        {
+          streaksActive && <Streaks habits={habits} setStreaksActive={setStreaksActive} />
+        }
         
-        <History records={records} today={today} />
+        
+        <History records={records} today={today} setStreaksActive={setStreaksActive} />
       </StyledMain>
 
     </>

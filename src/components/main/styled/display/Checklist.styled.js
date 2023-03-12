@@ -25,6 +25,23 @@ export const StyledChecklist = styled.section`
         }
     }
 
+    .checklist-streak-btn {
+        border: none;
+        background: none;
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        padding: .5rem;
+        text-transform: uppercase;
+        color: ${({theme}) => theme.colors.accentMain}50;
+        transition: all 150ms linear;
+
+        &:hover {
+            cursor: pointer;
+            color: ${({theme}) => theme.colors.accentMain};
+        }
+    }
+
     .checklist-qty-form {
         background: ${({theme}) => theme.colors.bgSecondary};
         border-radius: .5rem;
