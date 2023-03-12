@@ -136,13 +136,13 @@ export default function HabitSetup({ habitList, createHabitList, setSetupFormAct
 
         {tempHabitsList.length < 10 && (
             <div className="new-habit-form">
-                <input ref={habitName} className="habit-name" type="text" placeholder="Habit Name" maxLength="20" />
+                <input ref={habitName} className="global-input" type="text" placeholder="Habit Name" maxLength="20" />
                 <div className="habit-specs">
                     <button className="habit-color" onClick={openColorInput} aria-label="Color selector" style={habitColor ? {"background" : `${habitColor}`} : {"background" : `${({theme}) => theme.colors.bgSecondary}`}}></button>
                     {
                         colorInputActive && <ColorInput closeColorInput={closeColorInput} setSelectedColor={setSelectedColor} />
                     }
-                    <select name="habit-type" id="habit-type" ref={habitTypeInput} onChange={changeHabitType}>
+                    <select name="habit-type" className="global-input" ref={habitTypeInput} onChange={changeHabitType}>
                         <option value="" defaultValue disabled>Habit Type</option>
                         <option value="check">Yes/No</option>
                         <option value="quantity">Quantity</option>
@@ -152,8 +152,8 @@ export default function HabitSetup({ habitList, createHabitList, setSetupFormAct
                     habitType === "quantity" && (
                         <div className="habit-quantity-values">
                             <label className="habit-quantity-label">
-                                Goal
-                                <input ref={quantityGoalInput} className="habit-quantity-input" type="number" placeholder="Enter goal amount" />
+                                Goal: 
+                                <input ref={quantityGoalInput} className="global-input" type="number" placeholder="Enter goal amount" />
                             </label>
                         </div>
                     )

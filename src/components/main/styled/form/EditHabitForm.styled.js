@@ -10,50 +10,12 @@ export const StyledEditHabitForm = styled.div`
     width: 22.5rem;
     background: ${({theme}) => theme.colors.bgSecondary};
 
-    .close-edit-btn {
-        position: absolute;
-        right: .5rem;
-        top: .25rem;
-        font-size: 1.5rem;
-        color: ${({theme}) => theme.colors.textMain};
-        background: ${({theme}) => theme.colors.bgSecondary};
-        border: none;
-        transition: all 200ms linear;
-
-        &:hover {
-            cursor: pointer;
-            color: ${({theme}) => theme.colors.accentMain}50;
-        }
-    }
-
     .edit-details {
         padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-        .edit-name, .edit-quantity input {
-            padding: .5rem;
-            font-size: 1rem;
-            border-radius: .5rem;
-            border: 1px solid ${({theme}) => theme.colors.textMain}75;
-            font-family: ${({theme}) => theme.fonts.mainText};
-            color: ${({theme}) => theme.colors.textMain};
-            background: ${({theme}) => theme.colors.bgSecondary};
-            transition: all 150ms linear;
-
-            &::placeholder {
-                font-family: ${({theme}) => theme.fonts.mainText};
-            }
-
-            &:hover {
-                cursor: pointer;
-                background: ${({theme}) => theme.colors.bgMain};
-            }
-
-            &:focus {
-                outline: none;
-                border: 2px solid ${({theme}) => theme.colors.accentMain};
-                background: ${({theme}) => theme.colors.accentMain}10;
-            }
-        }
 
         .edit-details-group {
             display: flex;
@@ -62,30 +24,21 @@ export const StyledEditHabitForm = styled.div`
             padding: .75rem;
         }
 
+        .qty-edit-label {
+            input {
+                margin-left: .5rem;
+            }
+        }
+
         .edit-color {
             height: 1.5rem;
             width: 1.5rem;
             border-radius: 50%;
+            margin: 0 .5rem;
 
             &:hover {
                 cursor: pointer;
                 opacity: .75;
-            }
-        }
-
-        .edit-quantity {
-            padding: .5rem;
-            display: flex;
-            justify-content: center;
-            border-radius: .5rem;
-
-            label {
-                color: ${({theme}) => theme.colors.textMain}75;
-                
-                input {
-                    margin-left: .5rem;
-                    width: 5rem;
-                }
             }
         }
     }

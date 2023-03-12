@@ -66,19 +66,16 @@ export default function EditHabitForm({ habit, updateHabit, deleteHabit, closeEd
         
         <div className="edit-details">
           <div className="edit-details-group">
-            <input ref={nameInput} className="edit-name" type="text" placeholder={habit.name} />
+            <input ref={nameInput} className="global-input" type="text" placeholder={habit.name} />
             <div onClick={openColorInput} className="edit-color" style={ habitColor ? {"background": `${habitColor}`} : {"background": `${habit.color}`}}></div>
           </div>
 
           {
             habit.type === "quantity" && (
-              <div className="edit-quantity">
-                <label >
-                Goal Amount: 
-                <input ref={goalInput} placeholder={habit.goal.amt} />
-              </label>
-              </div>
-              
+                <label className="qty-edit-label">
+                  Goal: 
+                  <input ref={goalInput} placeholder={habit.goalAmt} className="global-input" />
+                </label>
             )
           }
         </div>

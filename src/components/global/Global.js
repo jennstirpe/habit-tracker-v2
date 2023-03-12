@@ -35,6 +35,9 @@ const GlobalStyles = createGlobalStyle`
             background: none;
             border: none;
             transition: all 200ms linear;
+            position: absolute;
+            top: .5rem;
+            right: .75rem;
 
             &:hover {
                 cursor: pointer;
@@ -87,6 +90,32 @@ const GlobalStyles = createGlobalStyle`
                         fill: ${({theme}) => theme.colors.accentMain};
                     }
                 }
+            }
+        }
+
+        .global-input {
+            padding: .5rem;
+            font-size: 1rem;
+            border-radius: .5rem;
+            border: 1px solid ${({theme}) => theme.colors.textMain}75;
+            font-family: ${({theme}) => theme.fonts.mainText};
+            color: ${({theme}) => theme.colors.textMain};
+            background: ${({theme}) => theme.colors.bgSecondary};
+            transition: all 150ms linear;
+
+            &::placeholder {
+                font-family: ${({theme}) => theme.fonts.mainText};
+            }
+
+            &:hover {
+                cursor: pointer;
+                background: ${({theme}) => theme.colors.bgMain};
+            }
+
+            &:focus {
+                outline: none;
+                border: 2px solid ${({theme}) => theme.colors.accentMain};
+                background: ${({theme}) => theme.colors.accentMain}10;
             }
         }
     }
