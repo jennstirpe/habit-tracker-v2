@@ -62,7 +62,7 @@ export default function EditHabitForm({ habit, updateHabit, deleteHabit, closeEd
   return (
     <StyledEditHabitForm>
    
-        <button onClick={handleCloseEditForm} className="close-edit-btn" aria-label="Close edit form">×</button>
+        <button onClick={handleCloseEditForm} className="global-close-btn" aria-label="Close edit form">&#x2715;</button>
         
         <div className="edit-details">
           <div className="edit-details-group">

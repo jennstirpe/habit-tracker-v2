@@ -19,7 +19,7 @@ export default function ColorInput({ closeColorInput, setSelectedColor }) {
 
   return (
     <StyledColorInput>
-        <button onClick={closeColorInput} className="color-select-close" aria-label="Close color selector">×</button>
+        <button onClick={closeColorInput} className="global-close-btn" aria-label="Close color selector">&#x2715;</button>
         
         <div onChange={setColorChoice} className="color-options">
             <label  className="color-option">
@@ -88,7 +88,7 @@ export default function ColorInput({ closeColorInput, setSelectedColor }) {
             </label>
         </div>
 
-        <button onClick={handleSetSelectedColor} className="color-submit">Select</button>
+        <button onClick={handleSetSelectedColor} className="global-submit-btn">Select</button>
 
     </StyledColorInput>
   )

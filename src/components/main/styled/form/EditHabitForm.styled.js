@@ -109,6 +109,7 @@ export const StyledEditHabitForm = styled.div`
             text-transform: uppercase;
             font-size: .85rem;
             padding: .5rem;
+            color: ${({theme}) => theme.colors.textMain}85;
 
             &:hover {
                 cursor: pointer;
@@ -118,16 +119,17 @@ export const StyledEditHabitForm = styled.div`
 
         .update {
             background: ${({theme}) => theme.colors.accentMain}25;
-            border:none;
+            border: none;
             border-radius: .5rem;
-            color: ${({theme}) => theme.colors.textMain}50;
+            color: ${({theme}) => theme.colors.textMain}85;
             font-size: 1rem;
             padding: .75rem;
 
             &:hover {
                 cursor: pointer;
-                background: ${({theme}) => theme.colors.accentMain}50;
+                background: ${({theme}) => theme.colors.accentMain}95;
                 color: #fff;
+                box-shadow: 0 0 1.5rem ${({theme}) => theme.colors.bgMain}50;
             }
         }
 
@@ -141,7 +143,7 @@ export const StyledEditHabitForm = styled.div`
             svg {
                 height: 1.35rem;
                 stroke: ${({theme}) => theme.colors.textMain}75;
-                transition: all 150ms linear;
+                transition: all 250ms linear;
             }
 
             &:hover {
