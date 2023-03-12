@@ -1,5 +1,5 @@
 import { StyledChecklist } from "../styled/display/Checklist.styled"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 
 export default function Checklist({ currentDay, completeHabit, updateHabitQuantity }) {
 
@@ -24,7 +24,6 @@ export default function Checklist({ currentDay, completeHabit, updateHabitQuanti
         }
 
     }
-
 
   return (
     <StyledChecklist>

@@ -10,9 +10,11 @@ import Checklist from "./components/main/display/Checklist";
 import History from "./components/main/display/History";
 import { StyledMain } from "./components/main/Main.styled";
 import HabitSetup from "./components/main/form/HabitSetup";
+import Streaks from "./components/main/display/Streaks";
 
 function App() {
 
+// WHEN DAY CHANGES, ADD NEW RECORD
   const date = new Date();
   const [ today, setToday ] = useState([]);
 
@@ -33,7 +35,7 @@ function App() {
   }, [today])
 
 // SET THEME
-const [colorTheme, setColorTheme] = useState('light');
+  const [colorTheme, setColorTheme] = useState('light');
 
   function toggleTheme() {
     if (colorTheme === "dark") {
@@ -44,31 +46,39 @@ const [colorTheme, setColorTheme] = useState('light');
   }
 
 
-// HABITS LIST
+// HABITS -- LIST
   const [ habits, setHabits ] = useState([
       { 
         id: 1,
         name: "Tidy room",
         color: "#f72585",
         type: "check",
+        currentStreak: 10,
+        bestStreak: 10
       },
       { 
         id: 2,
         name: "Skincare",
         color: "#0a9396",
         type: "check",
+        currentStreak: 4,
+        bestStreak: 10
       },
       { 
         id: 3,
         name: "Make bed",
         color: "#d883ff",
         type: "check",
+        currentStreak: 3,
+        bestStreak: 5
       },
       { 
         id: 4,
         name: "Vitamins",
         color: "#d00000",
         type: "check",
+        currentStreak: 0,
+        bestStreak: 0
       },
       { 
         id: 5,
@@ -76,51 +86,71 @@ const [colorTheme, setColorTheme] = useState('light');
         color: "#ffaa00",
         type: "quantity",
         goalAmt: 80,
+        currentStreak: 5,
+        bestStreak: 5
       },
     ])
-
-    const [ setupFormActive, setSetupFormActive ] = useState(false);
-
-    function createHabitList(list) {
-      setHabits(list);
-      setSetupFormActive(false)
+// HABITS -- HABIT EDIT FORM OPEN/CLOSE
+  const [ setupFormActive, setSetupFormActive ] = useState(false);
+// HABITS -- UPDATE HABITS LIST WHEN USER MAKES CHANGES TO IT
+  function createHabitList(list) {
+    setHabits(list);
+    setSetupFormActive(false)
+      
+    const habitsCopy = [...list];
+    const habitsList = habitsCopy.map(habit => {
+      if (habit.type === "check") {
+        return { id: habit.id, name: habit.name, color: habit.color, type: habit.type, complete: false}
+      } else {
+        return { id: habit.id, name: habit.name, color: habit.color, type: habit.type, goal: { currentAmt: 0, goalAmt: habit.goalAmt}, complete: false }
+      }
+    })
+    // UPDATE CURRENT DAY RECORD TO REFLECT CHANGES TO HABITS LIST
+    if(today.length === 0) {
+      return
+    } else {
+      if(records[0].date.toString() == today.toString()) {
+        records[0] = {...records[0], habits: habitsList};
+      }
     }
+  }
 
+// RECORDS -- LIST
   const [ records, setRecords ] = useState([
     {
       id: "33",
       date: [2023, 3, 9],
       habits: [
         {
-          id: 'Tidy room',
+          id: 1,
           name: "Tidy Room",
           color: "#f72585",
           type: "check",
           complete: true
         },
         {
-          id: 'Skincare',
+          id: 2,
           name: "Skincare",
           color: "#0a9396",
           type: "check",
           complete: false
         },
         {
-          id: 'Make bed',
+          id: 3,
           name: "Make bed",
           color: "#d883ff",
           type: "check",
           complete: true
         },
         {
-          id: 'Vitamins',
+          id: 4,
           name: "Vitamins",
           color: "#d00000",
           type: "check",
           complete: false
         },
         { 
-          id: "Drink Water",
+          id: 5,
           name: "Drink Water",
           color: "#ffaa00",
           type: "quantity",
@@ -137,35 +167,35 @@ const [colorTheme, setColorTheme] = useState('light');
       date: [2023, 3, 8],
       habits: [
         {
-          id: 'Tidy room',
+          id: 1,
           name: "Tidy Room",
           color: "#f72585",
           type: "check",
           complete: false
         },
         {
-          id: 'Skincare',
+          id: 2,
           name: "Skincare",
           color: "#0a9396",
           type: "check",
           complete: false
         },
         {
-          id: 'Make bed',
+          id: 3,
           name: "Make bed",
           color: "#d883ff",
           type: "check",
           complete: true
         },
         {
-          id: 'Vitamins',
+          id: 4,
           name: "Vitamins",
           color: "#d00000",
           type: "check",
           complete: true
         },
         { 
-          id: "Drink Water",
+          id: 5,
           name: "Drink Water",
           color: "#ffaa00",
           type: "quantity",
@@ -182,35 +212,35 @@ const [colorTheme, setColorTheme] = useState('light');
       date: [2023, 3, 7],
       habits: [
         {
-          id: 'Tidy room',
+          id: 1,
           name: "Tidy Room",
           color: "#f72585",
           type: "check",
           complete: true
         },
         {
-          id: 'Skincare',
+          id: 2,
           name: "Skincare",
           color: "#0a9396",
           type: "check",
           complete: true
         },
         {
-          id: 'Make bed',
+          id: 3,
           name: "Make bed",
           color: "#d883ff",
           type: "check",
           complete: false
         },
         {
-          id: 'Vitamins',
+          id: 4,
           name: "Vitamins",
           color: "#d00000",
           type: "check",
           complete: true
         },
         { 
-          id: "Drink Water",
+          id: 5,
           name: "Drink Water",
           color: "#ffaa00",
           type: "quantity",
@@ -224,62 +254,90 @@ const [colorTheme, setColorTheme] = useState('light');
     },
   ])
 
-function createNewDay() {
-  const habitsCopy = [...habits];
-  const habitsList = habitsCopy.map(habit => {
-    if (habit.type === "check") {
-      return { id: uuidv4(), name: habit.name, color: habit.color, type: habit.type, complete: false }
-    } else {
-      return { id: uuidv4(), name: habit.name, color: habit.color, type: habit.type, goal: { currentAmt: 0, goalAmt: habit.goalAmt}, complete: false }
+// RECORDS -- CREATE NEW RECORD FOR CURRENT DAY
+  function createNewDay() {
+    const habitsCopy = [...habits];
+    const habitsList = habitsCopy.map(habit => {
+      if (habit.type === "check") {
+        return { id: habit.id, name: habit.name, color: habit.color, type: habit.type, complete: false }
+      } else {
+        return { id: habit.id, name: habit.name, color: habit.color, type: habit.type, goal: { currentAmt: 0, goalAmt: habit.goalAmt}, complete: false }
+      }
+    })
+
+    const newRecord = {
+      id: uuidv4(),
+      date: [...today],
+      habits: [...habitsList]
     }
-  })
 
-  const newRecord = {
-    id: uuidv4(),
-    date: [...today],
-    habits: [...habitsList]
+    setRecords([newRecord, ...records]);
   }
 
-  setRecords([newRecord, ...records]);
-}
+  // useEffect(() => {
+  //   console.log("records: ")
+  //   console.log(records)
+  // }, [records])
+
+  // useEffect(() => {
+  //   console.log("habits: ")
+  //   console.log(habits)
+  // }, [habits])
 
 
-// useEffect(() => {
-//   console.log(records)
-// }, [records])
+  function completeHabit(updatedHabit) {
+    const updatedRecords = [...records];
+    const currentDay = updatedRecords[0];
+    const selectedHabit = currentDay.habits.find(habit => habit.id === updatedHabit.id);
 
-useEffect(() => {
-  createNewDay()
-  console.log(habits)
-}, [habits])
+    selectedHabit.complete = !selectedHabit.complete;
+    if(selectedHabit.complete === true) {
+      updateStreaks(selectedHabit.id, true)
+    } else {
+      updateStreaks(selectedHabit.id, false)
+    }
+    
 
-
-function completeHabit(updatedHabit) {
-  const updatedRecords = [...records];
-  const currentDay = updatedRecords[0];
-  const selectedHabit = currentDay.habits.find(habit => habit.id === updatedHabit.id);
-
-  selectedHabit.complete = !selectedHabit.complete;
-
-  setRecords(updatedRecords);
-}
-
-function updateHabitQuantity(updatedHabit, newAmt) {
-  const updatedRecords = [...records];
-  const currentDay = updatedRecords[0];
-  const selectedHabit = currentDay.habits.find(habit => habit.id === updatedHabit.id);
-
-  selectedHabit.goal.currentAmt = selectedHabit.goal.currentAmt + Number(newAmt);
-  if(selectedHabit.goal.currentAmt >= selectedHabit.goal.goalAmt) {
-    selectedHabit.complete = true;
-  } else {
-    selectedHabit.complete = false;
+    setRecords(updatedRecords);
   }
 
-  setRecords(updatedRecords);
-}
+  function updateHabitQuantity(updatedHabit, newAmt) {
+    const updatedRecords = [...records];
+    const currentDay = updatedRecords[0];
+    const selectedHabit = currentDay.habits.find(habit => habit.id === updatedHabit.id);
 
+    selectedHabit.goal.currentAmt = selectedHabit.goal.currentAmt + Number(newAmt);
+    if(selectedHabit.goal.currentAmt >= selectedHabit.goal.goalAmt) {
+      selectedHabit.complete = true;
+      updateStreaks(selectedHabit.id, true)
+    } else {
+      selectedHabit.complete = false;
+      updateStreaks(selectedHabit.id, false)
+    }
 
+    setRecords(updatedRecords);
+  }
+
+  function updateStreaks(habitId, completed) {
+    const habitsCopy = [...habits];
+    const selectedHabit = habitsCopy.find(habit => habit.id === habitId);
+
+    if(completed === true) {
+      selectedHabit.currentStreak += 1;
+    } else {
+      if (selectedHabit.bestStreak == selectedHabit.currentStreak) {
+        selectedHabit.bestStreak -= 1;
+      }
+      selectedHabit.currentStreak -= 1;
+    }
+    
+
+    if(selectedHabit.bestStreak < selectedHabit.currentStreak) {
+      selectedHabit.bestStreak = selectedHabit.currentStreak;
+    }
+
+    setHabits([...habitsCopy])
+  }
 
 
 
@@ -297,6 +355,9 @@ function updateHabitQuantity(updatedHabit, newAmt) {
         }
         
         <Checklist currentDay={records[0]} completeHabit={completeHabit} updateHabitQuantity={updateHabitQuantity} />
+        
+        <Streaks habits={habits} />
+        
         <History records={records} today={today} />
       </StyledMain>
 

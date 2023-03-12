@@ -20,9 +20,9 @@ export default function HabitSetup({ habitList, createHabitList }) {
       let newHabit;
   
       if (habitType === "check") {
-        newHabit = { id: uuidv4(), name: habitName, color: habitColor, type: habitType }
+        newHabit = { id: uuidv4(), name: habitName, color: habitColor, type: habitType, currentStreak: 0, bestStreak: 0 }
       } else {
-        newHabit = { id: uuidv4(), name: habitName, color: habitColor, type: habitType, goalAmt: habitGoalAmt }
+        newHabit = { id: uuidv4(), name: habitName, color: habitColor, type: habitType, goalAmt: habitGoalAmt, currentStreak: 0, bestStreak: 0 }
       }
   
       setTempHabitsList([newHabit, ...tempListCopy])
@@ -70,7 +70,7 @@ export default function HabitSetup({ habitList, createHabitList }) {
     }
   
 // NEW HABIT INPUT
-const [colorInputActive, setColorInputActive] = useState(false);
+    const [colorInputActive, setColorInputActive] = useState(false);
 
     const habitName = useRef();
     const [habitColor, setHabitColor] = useState("");
