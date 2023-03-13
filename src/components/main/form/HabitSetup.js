@@ -159,7 +159,7 @@ export default function HabitSetup({ habitList, createHabitList, setSetupFormAct
                     )
                 }
                 
-                <button onClick={handleSubmitNewHabit} className="global-submit-btn" aria-label="Add new habit">+ Add</button>
+                <button onClick={handleSubmitNewHabit} className="global-submit-btn habit-submit-btn" aria-label="Add new habit">+ Add</button>
             </div>
         ) }
 

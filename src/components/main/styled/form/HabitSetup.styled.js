@@ -133,35 +133,41 @@ export const StyledHabitSetup = styled.section`
 
     }
 
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type=number]{
+        -moz-appearance: textfield;
+    }
+
     @media (min-width: 768px) {
         width: 45rem;
 
 
 // NEW HABIT FORM STYLES
         .new-habit-form {
-            padding: 2rem 7.5rem;
             flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            position: relative;
-            
-            h2 {
-                position: absolute;
-                top: .75rem;
-                left: .75rem;
-            }
+            justify-content: center;
+            padding: 1rem;
 
             .habit-specs {
-                width: 12.5rem;
+                margin: 0rem .5rem;
 
                 .habit-color {
-                    height: 2.75rem;
-                    width: 2.75rem;
+                    height: 2.25rem;
+                    width: 2.25rem;
                 }
             }
 
             .habit-quantity-values {
-                flex-direction: row;
+                margin-right: .75rem;
+            }
+
+            .habit-submit-btn {
+                height: 3.5rem;
+                width: 5.75rem;
             }
         }
 
