@@ -12,7 +12,7 @@ export const StyledStreaks = styled.section`
 
     .streak-container {
         width: 10rem;
-        margin: 1rem 0;
+        margin: 1rem .5rem;
         background: ${({theme}) => theme.colors.bgMain}75;
         border-radius: .5rem;
         box-shadow: 0 0 1.5rem ${({theme}) => theme.colors.boxShadow}25;

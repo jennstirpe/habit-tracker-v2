@@ -6,9 +6,9 @@ export default function History({ records, today }) {
     <StyledHistory>
         {
             records.map(record => {
-                return <li key={record.id}>
-                        <span>{record.date.toString() == today.toString() ? "Today" : record.date}</span>
-                        <ul className="display-bar">
+                return <li className="history-record" key={record.id}>
+                        <span className="history-record-date">{record.date.toString() == today.toString() ? "Today" : `${record.date[1]}/${record.date[2]}/${record.date[0]}`}</span>
+                        <ul className="history-record-display-bar">
                             {
                                 record.habits.map(habit => {
                                     if (habit.type === "check") {

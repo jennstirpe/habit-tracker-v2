@@ -4,7 +4,7 @@ export const StyledChecklist = styled.section`
     border-radius: 1rem;
     background: ${({theme}) => theme.colors.bgSecondary};
     margin: 2rem;
-    padding: 2rem;
+    padding: 2.5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -29,7 +29,7 @@ export const StyledChecklist = styled.section`
         border: none;
         background: none;
         position: absolute;
-        bottom: 1rem;
+        bottom: .5rem;
         right: 1rem;
         padding: .5rem;
         text-transform: uppercase;
