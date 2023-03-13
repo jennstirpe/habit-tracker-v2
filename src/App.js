@@ -12,6 +12,8 @@ import { StyledMain } from "./components/main/Main.styled";
 import HabitSetup from "./components/main/form/HabitSetup";
 import Streaks from "./components/main/display/Streaks";
 
+const LOCAL_STORAGE_KEY = "habitsapp.tracking"
+
 function App() {
 
 // WHEN DAY CHANGES, ADD NEW RECORD
@@ -19,14 +21,22 @@ function App() {
   const [ today, setToday ] = useState([]);
 
   useEffect(() => {
+    const storedHabitTracking = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+
+    if(storedHabitTracking) {
+      setHabits(storedHabitTracking.habits);
+      setRecords(storedHabitTracking.records);
+    }
+
     setToday([date.getFullYear(), date.getMonth() + 1, date.getDate()])
+
   }, [])
 
   useEffect(() => {
     if(today.length === 0) {
       return
     } else {
-      if(records[0].date.toString() == today.toString()) {
+      if(records.length > 0 && records[0].date.toString() == today.toString()) {
         return
       } else {
         createNewDay()
@@ -47,49 +57,50 @@ function App() {
 
 
 // HABITS -- LIST
-  const [ habits, setHabits ] = useState([
-      { 
-        id: 1,
-        name: "Tidy room",
-        color: "#f72585",
-        type: "check",
-        currentStreak: 10,
-        bestStreak: 10
-      },
-      { 
-        id: 2,
-        name: "Skincare",
-        color: "#0a9396",
-        type: "check",
-        currentStreak: 4,
-        bestStreak: 10
-      },
-      { 
-        id: 3,
-        name: "Make bed",
-        color: "#d883ff",
-        type: "check",
-        currentStreak: 3,
-        bestStreak: 5
-      },
-      { 
-        id: 4,
-        name: "Vitamins",
-        color: "#d00000",
-        type: "check",
-        currentStreak: 0,
-        bestStreak: 0
-      },
-      { 
-        id: 5,
-        name: "Drink Water",
-        color: "#ffaa00",
-        type: "quantity",
-        goalAmt: 80,
-        currentStreak: 5,
-        bestStreak: 5
-      },
-    ])
+const [ habits, setHabits ] = useState([]);
+  // const [ habits, setHabits ] = useState([
+  //     { 
+  //       id: 1,
+  //       name: "Tidy room",
+  //       color: "#f72585",
+  //       type: "check",
+  //       currentStreak: 10,
+  //       bestStreak: 10
+  //     },
+  //     { 
+  //       id: 2,
+  //       name: "Skincare",
+  //       color: "#0a9396",
+  //       type: "check",
+  //       currentStreak: 4,
+  //       bestStreak: 10
+  //     },
+  //     { 
+  //       id: 3,
+  //       name: "Make bed",
+  //       color: "#d883ff",
+  //       type: "check",
+  //       currentStreak: 3,
+  //       bestStreak: 5
+  //     },
+  //     { 
+  //       id: 4,
+  //       name: "Vitamins",
+  //       color: "#d00000",
+  //       type: "check",
+  //       currentStreak: 0,
+  //       bestStreak: 0
+  //     },
+  //     { 
+  //       id: 5,
+  //       name: "Drink Water",
+  //       color: "#ffaa00",
+  //       type: "quantity",
+  //       goalAmt: 80,
+  //       currentStreak: 5,
+  //       bestStreak: 5
+  //     },
+  //   ])
 // HABITS -- HABIT EDIT FORM OPEN/CLOSE
   const [ setupFormActive, setSetupFormActive ] = useState(false);
 // HABITS -- UPDATE HABITS LIST WHEN USER MAKES CHANGES TO IT
@@ -116,143 +127,144 @@ function App() {
   }
 
 // RECORDS -- LIST
-  const [ records, setRecords ] = useState([
-    {
-      id: "33",
-      date: [2023, 3, 9],
-      habits: [
-        {
-          id: 1,
-          name: "Tidy Room",
-          color: "#f72585",
-          type: "check",
-          complete: true
-        },
-        {
-          id: 2,
-          name: "Skincare",
-          color: "#0a9396",
-          type: "check",
-          complete: false
-        },
-        {
-          id: 3,
-          name: "Make bed",
-          color: "#d883ff",
-          type: "check",
-          complete: true
-        },
-        {
-          id: 4,
-          name: "Vitamins",
-          color: "#d00000",
-          type: "check",
-          complete: false
-        },
-        { 
-          id: 5,
-          name: "Drink Water",
-          color: "#ffaa00",
-          type: "quantity",
-          goal: {
-            currentAmt: 40,
-            goalAmt: 80,
-          },
-          complete: false
-        },
-      ]
-    },
-    {
-      id: "22",
-      date: [2023, 3, 8],
-      habits: [
-        {
-          id: 1,
-          name: "Tidy Room",
-          color: "#f72585",
-          type: "check",
-          complete: false
-        },
-        {
-          id: 2,
-          name: "Skincare",
-          color: "#0a9396",
-          type: "check",
-          complete: false
-        },
-        {
-          id: 3,
-          name: "Make bed",
-          color: "#d883ff",
-          type: "check",
-          complete: true
-        },
-        {
-          id: 4,
-          name: "Vitamins",
-          color: "#d00000",
-          type: "check",
-          complete: true
-        },
-        { 
-          id: 5,
-          name: "Drink Water",
-          color: "#ffaa00",
-          type: "quantity",
-          goal: {
-            currentAmt: 80,
-            goalAmt: 80,
-          },
-          complete: true
-        },
-      ]
-    },
-    {
-      id: "11",
-      date: [2023, 3, 7],
-      habits: [
-        {
-          id: 1,
-          name: "Tidy Room",
-          color: "#f72585",
-          type: "check",
-          complete: true
-        },
-        {
-          id: 2,
-          name: "Skincare",
-          color: "#0a9396",
-          type: "check",
-          complete: true
-        },
-        {
-          id: 3,
-          name: "Make bed",
-          color: "#d883ff",
-          type: "check",
-          complete: false
-        },
-        {
-          id: 4,
-          name: "Vitamins",
-          color: "#d00000",
-          type: "check",
-          complete: true
-        },
-        { 
-          id: 5,
-          name: "Drink Water",
-          color: "#ffaa00",
-          type: "quantity",
-          goal: {
-            currentAmt: 60,
-            goalAmt: 80,
-          },
-          complete: false
-        },
-      ]
-    },
-  ])
+  const [ records, setRecords ] = useState([])
+  // const [ records, setRecords ] = useState([
+  //   {
+  //     id: "33",
+  //     date: [2023, 3, 9],
+  //     habits: [
+  //       {
+  //         id: 1,
+  //         name: "Tidy Room",
+  //         color: "#f72585",
+  //         type: "check",
+  //         complete: true
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "Skincare",
+  //         color: "#0a9396",
+  //         type: "check",
+  //         complete: false
+  //       },
+  //       {
+  //         id: 3,
+  //         name: "Make bed",
+  //         color: "#d883ff",
+  //         type: "check",
+  //         complete: true
+  //       },
+  //       {
+  //         id: 4,
+  //         name: "Vitamins",
+  //         color: "#d00000",
+  //         type: "check",
+  //         complete: false
+  //       },
+  //       { 
+  //         id: 5,
+  //         name: "Drink Water",
+  //         color: "#ffaa00",
+  //         type: "quantity",
+  //         goal: {
+  //           currentAmt: 40,
+  //           goalAmt: 80,
+  //         },
+  //         complete: false
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     id: "22",
+  //     date: [2023, 3, 8],
+  //     habits: [
+  //       {
+  //         id: 1,
+  //         name: "Tidy Room",
+  //         color: "#f72585",
+  //         type: "check",
+  //         complete: false
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "Skincare",
+  //         color: "#0a9396",
+  //         type: "check",
+  //         complete: false
+  //       },
+  //       {
+  //         id: 3,
+  //         name: "Make bed",
+  //         color: "#d883ff",
+  //         type: "check",
+  //         complete: true
+  //       },
+  //       {
+  //         id: 4,
+  //         name: "Vitamins",
+  //         color: "#d00000",
+  //         type: "check",
+  //         complete: true
+  //       },
+  //       { 
+  //         id: 5,
+  //         name: "Drink Water",
+  //         color: "#ffaa00",
+  //         type: "quantity",
+  //         goal: {
+  //           currentAmt: 80,
+  //           goalAmt: 80,
+  //         },
+  //         complete: true
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     id: "11",
+  //     date: [2023, 3, 7],
+  //     habits: [
+  //       {
+  //         id: 1,
+  //         name: "Tidy Room",
+  //         color: "#f72585",
+  //         type: "check",
+  //         complete: true
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "Skincare",
+  //         color: "#0a9396",
+  //         type: "check",
+  //         complete: true
+  //       },
+  //       {
+  //         id: 3,
+  //         name: "Make bed",
+  //         color: "#d883ff",
+  //         type: "check",
+  //         complete: false
+  //       },
+  //       {
+  //         id: 4,
+  //         name: "Vitamins",
+  //         color: "#d00000",
+  //         type: "check",
+  //         complete: true
+  //       },
+  //       { 
+  //         id: 5,
+  //         name: "Drink Water",
+  //         color: "#ffaa00",
+  //         type: "quantity",
+  //         goal: {
+  //           currentAmt: 60,
+  //           goalAmt: 80,
+  //         },
+  //         complete: false
+  //       },
+  //     ]
+  //   },
+  // ])
 
 // RECORDS -- CREATE NEW RECORD FOR CURRENT DAY
   function createNewDay() {
@@ -283,6 +295,18 @@ function App() {
   //   console.log("habits: ")
   //   console.log(habits)
   // }, [habits])
+
+
+  useEffect(() => {
+    if(records.length !== 0 && habits.length !== 0) {
+      const habitTracking = {
+        "records": records,
+        "habits": habits
+      }
+
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(habitTracking))
+    }
+  }, [records, habits, today])
 
 
   function completeHabit(updatedHabit) {
@@ -352,7 +376,12 @@ function App() {
 
       <Header colorTheme={colorTheme} toggleTheme={toggleTheme} />
 
-      <StyledMain>
+      {
+        habits.length === 0 && <HabitSetup habitList={[]} createHabitList={createHabitList} setSetupFormActive={setSetupFormActive} />
+      }
+
+      {
+        habits.length > 0 && <StyledMain>
         <button onClick={() => setSetupFormActive(true)} className="global-edit-btn">
           <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M343.029 42.3419C352.402 32.9693 367.598 32.9694 376.971 42.3419L469.657 135.028C479.029 144.401 479.029 159.597 469.657 168.969L179.462 459.164C179.006 459.633 178.521 460.073 178.011 460.482C176 462.099 173.688 463.158 171.283 463.66C170.898 463.741 170.509 463.808 170.115 463.86L50.1148 479.86C45.175 480.519 40.2103 478.838 36.6864 475.314C33.1626 471.79 31.4819 466.826 32.1405 461.886L48.1164 342.066C48.5312 338.637 50.0545 335.317 52.6863 332.685L343.029 42.3419ZM393.372 199.999L167.999 425.372L86.6267 344L312 118.627L393.372 199.999ZM416 177.372L441.373 151.999L360 70.6262L334.627 95.9992L416 177.372ZM75.5807 378.208L66.6251 445.376L133.792 436.42L75.5807 378.208Z" fill="black"/></svg>
         </button>
@@ -369,6 +398,7 @@ function App() {
         
         <History records={records} today={today} setStreaksActive={setStreaksActive} />
       </StyledMain>
+      }
 
     </>
     </ThemeProvider>

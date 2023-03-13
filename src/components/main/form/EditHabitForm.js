@@ -45,9 +45,9 @@ export default function EditHabitForm({ habit, updateHabit, deleteHabit, closeEd
     }
 
     if(habit.type === "quantity") {
-      if(!goalInput.current.value || goalInput.current.value == habit.goal.amt) {
-        newGoal = habit.goal.amt;
-      } else if (goalInput.current.value !== habit.goal.amt) {
+      if(!goalInput.current.value || goalInput.current.value == habit.goalAmt) {
+        newGoal = habit.goalAmt;
+      } else if (goalInput.current.value !== habit.goalAmt) {
         newGoal = goalInput.current.value;
       }
     }

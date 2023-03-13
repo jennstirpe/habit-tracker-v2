@@ -48,8 +48,8 @@ export default function HabitSetup({ habitList, createHabitList, setSetupFormAct
         updatedHabit.color = newColor;
       }
       if(updatedHabit.type === "quantity") {
-        if(updatedHabit.goal.amt !== newGoal) {
-          updatedHabit.goal.amt = newGoal;
+        if(updatedHabit.goalAmt !== newGoal) {
+          updatedHabit.goalAmt = newGoal;
         }
       }
   
