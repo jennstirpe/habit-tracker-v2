@@ -55,218 +55,54 @@ function App() {
     }
   }
 
-
-// HABITS -- LIST
-const [ habits, setHabits ] = useState([]);
-  // const [ habits, setHabits ] = useState([
-  //     { 
-  //       id: 1,
-  //       name: "Tidy room",
-  //       color: "#f72585",
-  //       type: "check",
-  //       currentStreak: 10,
-  //       bestStreak: 10
-  //     },
-  //     { 
-  //       id: 2,
-  //       name: "Skincare",
-  //       color: "#0a9396",
-  //       type: "check",
-  //       currentStreak: 4,
-  //       bestStreak: 10
-  //     },
-  //     { 
-  //       id: 3,
-  //       name: "Make bed",
-  //       color: "#d883ff",
-  //       type: "check",
-  //       currentStreak: 3,
-  //       bestStreak: 5
-  //     },
-  //     { 
-  //       id: 4,
-  //       name: "Vitamins",
-  //       color: "#d00000",
-  //       type: "check",
-  //       currentStreak: 0,
-  //       bestStreak: 0
-  //     },
-  //     { 
-  //       id: 5,
-  //       name: "Drink Water",
-  //       color: "#ffaa00",
-  //       type: "quantity",
-  //       goalAmt: 80,
-  //       currentStreak: 5,
-  //       bestStreak: 5
-  //     },
-  //   ])
-// HABITS -- HABIT EDIT FORM OPEN/CLOSE
+          /*      HABITS       */
+// LIST
+  const [ habits, setHabits ] = useState([]);
+  
+// HABIT EDIT FORM OPEN/CLOSE
   const [ setupFormActive, setSetupFormActive ] = useState(false);
-// HABITS -- UPDATE HABITS LIST WHEN USER MAKES CHANGES TO IT
+
+// UPDATE HABITS LIST WHEN USER MAKES CHANGES TO IT
   function createHabitList(list) {
-    setHabits(list);
-    setSetupFormActive(false)
-      
-    const habitsCopy = [...list];
-    const habitsList = habitsCopy.map(habit => {
-      if (habit.type === "check") {
-        return { id: habit.id, name: habit.name, color: habit.color, type: habit.type, complete: false}
+
+    // UPDATE HABITS LIST WITH ADDED/EDITED HABITS
+    setHabits(list)
+    setSetupFormActive(false);
+
+    // ADD NEW HABITS TO CURRENT DAY WITHOUT RESETTING EXISTING HABITS THAT WEREN'T EDITED
+    const origRecords = [...records]
+    let origCurrentDayHabits = origRecords[0].habits;
+
+    const newCurrentDayHabits = list.map(newHabit => {
+      const existingHabit = origCurrentDayHabits.find(origHabit => origHabit.id === newHabit.id);
+      if(existingHabit) {
+        return existingHabit;
       } else {
-        return { id: habit.id, name: habit.name, color: habit.color, type: habit.type, goal: { currentAmt: 0, goalAmt: habit.goalAmt}, complete: false }
+        if (newHabit.type === "check") {
+          return { id: newHabit.id, name: newHabit.name, color: newHabit.color, type: newHabit.type, complete: false}
+        } else {
+          return { id: newHabit.id, name: newHabit.name, color: newHabit.color, type: newHabit.type, goal: { currentAmt: 0, goalAmt: newHabit.goalAmt}, complete: false }
+        }
       }
-    })
+
+    });
+
     // UPDATE CURRENT DAY RECORD TO REFLECT CHANGES TO HABITS LIST
     if(today.length === 0) {
       return
     } else {
       if(records[0].date.toString() == today.toString()) {
-        records[0] = {...records[0], habits: habitsList};
+        records[0] = {...records[0], habits: newCurrentDayHabits};
       }
     }
   }
 
-// RECORDS -- LIST
-  const [ records, setRecords ] = useState([])
-  // const [ records, setRecords ] = useState([
-  //   {
-  //     id: "33",
-  //     date: [2023, 3, 9],
-  //     habits: [
-  //       {
-  //         id: 1,
-  //         name: "Tidy Room",
-  //         color: "#f72585",
-  //         type: "check",
-  //         complete: true
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Skincare",
-  //         color: "#0a9396",
-  //         type: "check",
-  //         complete: false
-  //       },
-  //       {
-  //         id: 3,
-  //         name: "Make bed",
-  //         color: "#d883ff",
-  //         type: "check",
-  //         complete: true
-  //       },
-  //       {
-  //         id: 4,
-  //         name: "Vitamins",
-  //         color: "#d00000",
-  //         type: "check",
-  //         complete: false
-  //       },
-  //       { 
-  //         id: 5,
-  //         name: "Drink Water",
-  //         color: "#ffaa00",
-  //         type: "quantity",
-  //         goal: {
-  //           currentAmt: 40,
-  //           goalAmt: 80,
-  //         },
-  //         complete: false
-  //       },
-  //     ]
-  //   },
-  //   {
-  //     id: "22",
-  //     date: [2023, 3, 8],
-  //     habits: [
-  //       {
-  //         id: 1,
-  //         name: "Tidy Room",
-  //         color: "#f72585",
-  //         type: "check",
-  //         complete: false
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Skincare",
-  //         color: "#0a9396",
-  //         type: "check",
-  //         complete: false
-  //       },
-  //       {
-  //         id: 3,
-  //         name: "Make bed",
-  //         color: "#d883ff",
-  //         type: "check",
-  //         complete: true
-  //       },
-  //       {
-  //         id: 4,
-  //         name: "Vitamins",
-  //         color: "#d00000",
-  //         type: "check",
-  //         complete: true
-  //       },
-  //       { 
-  //         id: 5,
-  //         name: "Drink Water",
-  //         color: "#ffaa00",
-  //         type: "quantity",
-  //         goal: {
-  //           currentAmt: 80,
-  //           goalAmt: 80,
-  //         },
-  //         complete: true
-  //       },
-  //     ]
-  //   },
-  //   {
-  //     id: "11",
-  //     date: [2023, 3, 7],
-  //     habits: [
-  //       {
-  //         id: 1,
-  //         name: "Tidy Room",
-  //         color: "#f72585",
-  //         type: "check",
-  //         complete: true
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Skincare",
-  //         color: "#0a9396",
-  //         type: "check",
-  //         complete: true
-  //       },
-  //       {
-  //         id: 3,
-  //         name: "Make bed",
-  //         color: "#d883ff",
-  //         type: "check",
-  //         complete: false
-  //       },
-  //       {
-  //         id: 4,
-  //         name: "Vitamins",
-  //         color: "#d00000",
-  //         type: "check",
-  //         complete: true
-  //       },
-  //       { 
-  //         id: 5,
-  //         name: "Drink Water",
-  //         color: "#ffaa00",
-  //         type: "quantity",
-  //         goal: {
-  //           currentAmt: 60,
-  //           goalAmt: 80,
-  //         },
-  //         complete: false
-  //       },
-  //     ]
-  //   },
-  // ])
+          /*      RECORDS       */
 
-// RECORDS -- CREATE NEW RECORD FOR CURRENT DAY
+// LIST
+  const [ records, setRecords ] = useState([])
+
+// CREATE NEW RECORD FOR CURRENT DAY
   function createNewDay() {
     const habitsCopy = [...habits];
     const habitsList = habitsCopy.map(habit => {
@@ -285,16 +121,6 @@ const [ habits, setHabits ] = useState([]);
 
     setRecords([newRecord, ...records]);
   }
-
-  // useEffect(() => {
-  //   console.log("records: ")
-  //   console.log(records)
-  // }, [records])
-
-  // useEffect(() => {
-  //   console.log("habits: ")
-  //   console.log(habits)
-  // }, [habits])
 
 
   useEffect(() => {
@@ -320,7 +146,6 @@ const [ habits, setHabits ] = useState([]);
     } else {
       updateStreaks(selectedHabit.id, false)
     }
-    
 
     setRecords(updatedRecords);
   }
@@ -354,7 +179,6 @@ const [ habits, setHabits ] = useState([]);
       }
       selectedHabit.currentStreak -= 1;
     }
-    
 
     if(selectedHabit.bestStreak < selectedHabit.currentStreak) {
       selectedHabit.bestStreak = selectedHabit.currentStreak;
