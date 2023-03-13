@@ -3,43 +3,23 @@ import styled from "styled-components";
 export const StyledColorInput = styled.div`
     border-radius: 1rem;
     box-shadow: 0 0 1rem ${({theme}) => theme.colors.boxShadow}50;
-    width: 17rem;
-    height: 17rem;
+    width: 20rem;
+    padding: 2rem 4rem;
     background: ${({theme}) => theme.colors.bgMain};
     display: flex;
     flex-direction: column;
-    align-items: center;
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: -2rem;
     left: 0;
     right: 0;
     margin: auto;
     z-index: 5;
-    padding-top: 1.5rem;
-    
-    .color-select-close {
-        position: absolute;
-        left: .5rem;
-        top: .25rem;
-        font-size: 2rem;
-        color: ${({theme}) => theme.colors.textMain};
-        background: ${({theme}) => theme.colors.bgMain};
-        border: none;
-        transition: all 200ms linear;
-
-        &:hover {
-            cursor: pointer;
-            color: ${({theme}) => theme.colors.accentMain}50;
-        }
-    }
 
     .color-options {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        height: 12rem;
-        width: 12rem;
+        margin-bottom: 1rem;
 
         .color-option {
             height: 2.25rem;
@@ -47,11 +27,11 @@ export const StyledColorInput = styled.div`
             border-radius: 50%;
             margin: .2rem .1rem;
             position: relative;
-            background: black;
+            transition: all 150ms linear;
 
             &:hover {
                 cursor: pointer;
-                opacity: .8;
+                opacity: .65;
             }
 
             .color-selected {
@@ -125,24 +105,8 @@ export const StyledColorInput = styled.div`
         }
     }    
 
-    .color-submit {
-        width: 90%;
-        padding: .5rem 0;
-        margin-top: 1rem;
-        font-size: 1rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        border-radius: 1rem;
-        color: ${({theme}) => theme.colors.textMain};
-        background: ${({theme}) => theme.colors.bgSecondary};
-        border: none;
-        transition: all 200ms linear;
-
-        &:hover {
-            cursor: pointer;
-            background: ${({theme}) => theme.colors.accentMain}70;
-            color: #fff;
-        }
-        
+    @media (min-width: 768px) { 
+        width: 30rem;
     }
+
 `;

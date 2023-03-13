@@ -5,6 +5,7 @@ export const StyledHistory = styled.ul`
 
     .history-record {
         border: 1px solid ${({theme}) => theme.colors.textSecondary};
+        background: ${({theme}) => theme.colors.bgSecondary}75;
         border-radius: .5rem;
         display: flex;
         justify-content: space-between;
@@ -42,11 +43,15 @@ export const StyledHistory = styled.ul`
             .display-bar-box {
                 height: 2rem;
                 width: 2.15rem;
-                border: 1px solid ${({theme}) => theme.colors.textMain}50;
+                border-top: 1px solid ${({theme}) => theme.colors.textMain}75;
+                border-bottom: 1px solid ${({theme}) => theme.colors.textMain}75;
+                border-right: 1px solid ${({theme}) => theme.colors.textMain}75;
+                border-left: none;
 
                 &:first-of-type {
                     border-top-left-radius: .25rem;
                     border-bottom-left-radius: .25rem;
+                    border-left: 1px solid ${({theme}) => theme.colors.textMain}75;
                 }
 
                 &:last-of-type {
