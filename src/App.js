@@ -150,6 +150,14 @@ function App() {
     setRecords(updatedRecords);
   }
 
+
+  useEffect(() => {
+    console.log("records: ")
+    console.log(records)
+    console.log("habits: ")
+    console.log(habits)
+  }, [records, habits])
+
   function updateHabitQuantity(updatedHabit, newAmt) {
     const updatedRecords = [...records];
     const currentDay = updatedRecords[0];

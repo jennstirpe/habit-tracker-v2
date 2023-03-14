@@ -37,7 +37,7 @@ export default function History({ records, today }) {
                                                 percentageComplete = 10;
                                             }
                                             return <li className="display-bar-box" key={habit.id} style={{'background' : `${habit.color}${percentageComplete}`}}>
-                                                <div className="display-bar-label qty"><span className="label-name">{habit.name}</span><span className="label-amt-current">{habit.goal.currentAmt > 0 ? habit.goal.currentAmt : "0"}</span> <span className="label-amt-goal">{habit.goal.goalAmt}</span></div>
+                                                <div className="display-bar-label qty"><span className="label-name">{habit.name}</span><span className="label-amt-current">{habit.goal.currentAmt}</span> <span className="label-amt-goal">{habit.goal.goalAmt}</span></div>
                                             </li>
                                         }
                                         

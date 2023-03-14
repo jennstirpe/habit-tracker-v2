@@ -22,7 +22,7 @@ export default function HabitSetup({ habitList, createHabitList, setSetupFormAct
       if (habitType === "check") {
         newHabit = { id: uuidv4(), name: habitName, color: habitColor, type: habitType, currentStreak: 0, bestStreak: 0 }
       } else {
-        newHabit = { id: uuidv4(), name: habitName, color: habitColor, type: habitType, goalAmt: habitGoalAmt, currentStreak: 0, bestStreak: 0 }
+        newHabit = { id: uuidv4(), name: habitName, color: habitColor, type: habitType, goalAmt: Number(habitGoalAmt), currentStreak: 0, bestStreak: 0 }
       }
   
       setTempHabitsList([newHabit, ...tempListCopy])
