@@ -15,7 +15,7 @@ export const StyledHabitSetup = styled.section`
     right: 0;
     margin: auto;
 
-    h2 {
+    .habit-setup-heading {
         margin: 1rem;
         text-transform: uppercase;
     }
@@ -110,27 +110,6 @@ export const StyledHabitSetup = styled.section`
                 }
             }
         }
-
-        .temp-habits-finish {
-            margin-top: 1rem;
-            font-size: 1.25rem;
-            padding: .75rem 0;
-            border-radius: .5rem;
-            border: 2px solid ${({theme}) => theme.colors.textMain}50;
-            background: ${({theme}) => theme.colors.accentMain}10;
-            color: ${({theme}) => theme.colors.textMain}75;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 150ms linear;
-
-            &:hover {
-                cursor: pointer;
-                background: ${({theme}) => theme.colors.accentMain}50;
-                color: #fff;
-                box-shadow: 0 0 1.5rem ${({theme}) => theme.colors.bgMain};
-            }
-        }
-
     }
 
     input::-webkit-outer-spin-button,
@@ -141,6 +120,8 @@ export const StyledHabitSetup = styled.section`
     input[type=number]{
         -moz-appearance: textfield;
     }
+
+    
 
     @media (min-width: 768px) {
         width: 45rem;
@@ -166,8 +147,9 @@ export const StyledHabitSetup = styled.section`
             }
 
             .habit-submit-btn {
-                height: 3.5rem;
+                height: 3rem;
                 width: 5.75rem;
+                margin-bottom: .5rem;
             }
         }
 

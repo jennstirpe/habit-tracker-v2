@@ -16,7 +16,6 @@ export const StyledEditHabitForm = styled.div`
         flex-direction: column;
         align-items: center;
 
-
         .edit-details-group {
             display: flex;
             justify-content: space-evenly;
@@ -107,7 +106,6 @@ export const StyledEditHabitForm = styled.div`
                 }
             }
         }
-
     }
 
     @media (min-width: 768px) { 

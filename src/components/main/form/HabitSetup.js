@@ -131,7 +131,7 @@ export default function HabitSetup({ habitList, createHabitList, setSetupFormAct
   return (
     <StyledHabitSetup>
 
-        <h2>Add habits</h2>
+        <h2 className="habit-setup-heading">Add habits</h2>
         <button onClick={() => setSetupFormActive(false)} className="global-close-btn">&#x2715;</button>
 
         {tempHabitsList.length < 10 && (

@@ -52,6 +52,7 @@ export const StyledChecklist = styled.section`
         align-items: center;
         position: absolute;
         top: -1rem;
+        z-index: 5;
 
         .checklist-qty-form-header {
             font-size: 2rem;

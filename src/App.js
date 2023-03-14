@@ -155,37 +155,90 @@ function App() {
     const currentDay = updatedRecords[0];
     const selectedHabit = currentDay.habits.find(habit => habit.id === updatedHabit.id);
 
-    selectedHabit.goal.currentAmt = selectedHabit.goal.currentAmt + Number(newAmt);
-    if(selectedHabit.goal.currentAmt >= selectedHabit.goal.goalAmt) {
-      selectedHabit.complete = true;
-      updateStreaks(selectedHabit.id, true)
+    if(selectedHabit.complete === true) {
+      selectedHabit.goal.currentAmt = selectedHabit.goal.currentAmt + Number(newAmt);
+
+      if(selectedHabit.goal.currentAmt < selectedHabit.goal.goalAmt) {
+        const habitsCopy = [...habits];
+        const incompleteHabit = habitsCopy.find(habit => habit.id === selectedHabit.id);
+
+        selectedHabit.complete = false;
+
+        if (incompleteHabit.bestStreak == incompleteHabit.currentStreak) {
+          incompleteHabit.bestStreak -= 1;
+        }
+        incompleteHabit.currentStreak -=1;
+        
+
+        setHabits(habitsCopy);
+        setRecords(updatedRecords);
+      }
     } else {
-      selectedHabit.complete = false;
-      updateStreaks(selectedHabit.id, false)
+      selectedHabit.goal.currentAmt = selectedHabit.goal.currentAmt + Number(newAmt);
+      if(selectedHabit.goal.currentAmt >= selectedHabit.goal.goalAmt) {
+        selectedHabit.complete = true;
+        updateStreaks(selectedHabit.id, true)
+      } else {
+        selectedHabit.complete = false;
+        updateStreaks(selectedHabit.id, false)
+      }
+  
+      setRecords(updatedRecords);
     }
 
-    setRecords(updatedRecords);
+    
   }
 
   function updateStreaks(habitId, completed) {
     const habitsCopy = [...habits];
     const selectedHabit = habitsCopy.find(habit => habit.id === habitId);
 
-    if(completed === true) {
-      selectedHabit.currentStreak += 1;
-    } else {
-      if (selectedHabit.bestStreak == selectedHabit.currentStreak) {
-        selectedHabit.bestStreak -= 1;
+      if(completed === true) {
+        selectedHabit.currentStreak += 1;
+      } else {
+        // if user toggles a task back to incomplete
+        if (selectedHabit.bestStreak == selectedHabit.currentStreak) {
+          selectedHabit.bestStreak -= 1;
+        }
+        selectedHabit.currentStreak = 0;
       }
-      selectedHabit.currentStreak -= 1;
-    }
+  
+      if(selectedHabit.bestStreak < selectedHabit.currentStreak) {
+        selectedHabit.bestStreak = selectedHabit.currentStreak;
+      }
 
-    if(selectedHabit.bestStreak < selectedHabit.currentStreak) {
-      selectedHabit.bestStreak = selectedHabit.currentStreak;
-    }
-
+  
     setHabits([...habitsCopy])
   }
+
+  useEffect(() => {
+
+    if(records.length > 0 && habits.length > 0) {
+      const checkedHabits = [...habits];
+      const prevDayHabits = records[1].habits;
+  
+      prevDayHabits.forEach(habit => {
+        if(habit.complete === false) {
+          const incompleteHabit = checkedHabits.find(checkedHabit => checkedHabit.id === habit.id);
+          if(incompleteHabit) {
+            incompleteHabit.currentStreak = 0;
+          } else {
+            return
+          }
+        }
+      })
+  
+      setHabits(checkedHabits);
+    } else {
+      return
+    }
+    
+
+  }, [today])
+
+  // useEffect(() => {
+  //   console.log(records[1].habits)
+  // }, [])
 
   const [ streaksActive, setStreaksActive ] = useState(false);
 
