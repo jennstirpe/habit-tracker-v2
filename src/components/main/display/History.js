@@ -2,9 +2,6 @@ import { StyledHistory } from "../styled/display/History.styled"
 
 export default function History({ records, today }) {
 
-    function check() {
-        alert("clicked")
-    }
 
   return (
     <StyledHistory>
@@ -31,7 +28,7 @@ export default function History({ records, today }) {
                                                 <div className="display-bar-label qty"><span className="label-name">{habit.name}</span><span className="label-amt-current">0</span> <span className="label-amt-goal">{habit.goal.goalAmt}</span></div>
                                             </li>
                                         } else if (habit.goal.currentAmt >= habit.goal.goalAmt) {
-                                            return <li className="display-bar-box" key={habit.id} style={{'background' : `${habit.color}`}} onClick={() => check()}>
+                                            return <li className="display-bar-box" key={habit.id} style={{'background' : `${habit.color}`}}>
                                                 <div className="display-bar-label qty"><span className="label-name">{habit.name}</span><span className="label-amt-current">{habit.goal.currentAmt}</span> <span className="label-amt-goal">{habit.goal.goalAmt}</span></div>
                                             </li>
                                         } else {
@@ -39,7 +36,7 @@ export default function History({ records, today }) {
                                             if (percentageComplete < 10) {
                                                 percentageComplete = 10;
                                             }
-                                            return <li className="display-bar-box" key={habit.id} style={{'background' : `${habit.color}${percentageComplete}`}} onClick={() => check()}>
+                                            return <li className="display-bar-box" key={habit.id} style={{'background' : `${habit.color}${percentageComplete}`}}>
                                                 <div className="display-bar-label qty"><span className="label-name">{habit.name}</span><span className="label-amt-current">{habit.goal.currentAmt > 0 ? habit.goal.currentAmt : "0"}</span> <span className="label-amt-goal">{habit.goal.goalAmt}</span></div>
                                             </li>
                                         }

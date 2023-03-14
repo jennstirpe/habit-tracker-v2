@@ -236,10 +236,6 @@ function App() {
 
   }, [today])
 
-  // useEffect(() => {
-  //   console.log(records[1].habits)
-  // }, [])
-
   const [ streaksActive, setStreaksActive ] = useState(false);
 
   function toggleStreaks() {
