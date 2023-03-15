@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { StyledColorInput } from "./../styled/form/ColorInput.styled"
+import ColorInputOption from "./ColorInputOption";
 
 export default function ColorInput({ closeColorInput, setSelectedColor }) {
 
@@ -20,72 +21,24 @@ export default function ColorInput({ closeColorInput, setSelectedColor }) {
   return (
     <StyledColorInput>
         <button onClick={closeColorInput} className="global-close-btn" aria-label="Close color selector">&#x2715;</button>
-        
+
         <div onChange={setColorChoice} className="color-options">
-            <label  className="color-option">
-                <input type="radio" name="color" value="#d00000" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#e85d04" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#ffaa00" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#ffd300" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#a1ff0a" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#38b000" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#0a9396" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#90e0ef" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#147df5" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#580aff" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#9336fd" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#9381ff" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#d883ff" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#b5179e" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#f72585" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
-            <label className="color-option">
-                <input type="radio" name="color" value="#ff758f" className="color-option-input"></input>
-                <span className="color-selected"></span>
-            </label>
+            <ColorInputOption value={"#d00000"} />
+            <ColorInputOption value={"#e85d04"} />
+            <ColorInputOption value={"#ffaa00"} />
+            <ColorInputOption value={"#ffd300"} />
+            <ColorInputOption value={"#a1ff0a"} />
+            <ColorInputOption value={"#38b000"} />
+            <ColorInputOption value={"#0a9396"} />
+            <ColorInputOption value={"#90e0ef"} />
+            <ColorInputOption value={"#147df5"} />
+            <ColorInputOption value={"#580aff"} />
+            <ColorInputOption value={"#9336fd"} />
+            <ColorInputOption value={"#9381ff"} />
+            <ColorInputOption value={"#d883ff"} />
+            <ColorInputOption value={"#b5179e"} />
+            <ColorInputOption value={"#f72585"} />
+            <ColorInputOption value={"#ff758f"} />
         </div>
 
         <button onClick={handleSetSelectedColor} className="global-submit-btn">Select</button>
