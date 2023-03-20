@@ -1,9 +1,10 @@
-import { StyledStreaks } from "../styled/display/Streaks.styled"
+import { StyledStreaks } from "../styled/display/Streaks.styled";
+import CloseBtn from "../../global/CloseBtn";
 
 export default function Streaks({ habits, setStreaksActive }) {
   return (
     <StyledStreaks>
-      <button onClick={() => setStreaksActive(false)} className="global-close-btn" aria-label="Close streaks">&#x2715;</button>
+      <CloseBtn closeFunction={() => setStreaksActive(false)} ariaLabel="Close streaks display" />
 
         {
             habits.map(habit => {

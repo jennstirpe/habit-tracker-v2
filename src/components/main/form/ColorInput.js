@@ -1,4 +1,5 @@
 import { useState } from "react"
+import CloseBtn from "../../global/CloseBtn";
 import { StyledColorInput } from "./../styled/form/ColorInput.styled"
 import ColorInputOption from "./ColorInputOption";
 
@@ -20,7 +21,7 @@ export default function ColorInput({ closeColorInput, setSelectedColor }) {
 
   return (
     <StyledColorInput>
-        <button onClick={closeColorInput} className="global-close-btn" aria-label="Close color selector">&#x2715;</button>
+        <CloseBtn closeFunction={closeColorInput} ariaLabel="Close color selector" />
 
         <div onChange={setColorChoice} className="color-options">
             <ColorInputOption value={"#d00000"} />

@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import CloseBtn from "../../global/CloseBtn";
 import { StyledEditHabitForm } from "../styled/form/EditHabitForm.styled";
 import ColorInput from "./ColorInput";
 
@@ -62,7 +63,7 @@ export default function EditHabitForm({ habit, updateHabit, deleteHabit, closeEd
   return (
     <StyledEditHabitForm>
    
-        <button onClick={handleCloseEditForm} className="global-close-btn" aria-label="Close edit form">&#x2715;</button>
+        <CloseBtn closeFunction={handleCloseEditForm} ariaLabel="Close edit form" />
         
         <div className="edit-details">
           <div className="edit-details-group">

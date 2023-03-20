@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import CloseBtn from "../../global/CloseBtn";
 
 import { StyledHabitSetup } from "../styled/form/HabitSetup.styled";
 import ColorInput from "./ColorInput";
@@ -132,7 +133,7 @@ export default function HabitSetup({ habitList, createHabitList, setSetupFormAct
     <StyledHabitSetup>
 
         <h2 className="habit-setup-heading">Add habits</h2>
-        <button onClick={() => setSetupFormActive(false)} className="global-close-btn">&#x2715;</button>
+        <CloseBtn closeFunction={() => setSetupFormActive(false)} ariaLabel="Close habit setup form" />
 
         {tempHabitsList.length < 10 && (
             <div className="new-habit-form">

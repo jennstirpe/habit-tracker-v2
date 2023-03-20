@@ -1,5 +1,6 @@
 import { StyledChecklist } from "../styled/display/Checklist.styled"
 import { useState, useRef } from "react"
+import CloseBtn from "../../global/CloseBtn";
 
 export default function Checklist({ currentDay, completeHabit, updateHabitQuantity, toggleStreaks, streaksActive }) {
 
@@ -42,7 +43,7 @@ export default function Checklist({ currentDay, completeHabit, updateHabitQuanti
         {
             quantityFormActive && (
             <form className="checklist-qty-form">
-                <button onClick={() => setQuantityFormActive(false)} className="global-close-btn">&#x2715;</button>
+                <CloseBtn closeFunction={() => setQuantityFormActive(false)} ariaLabel="Close quantity update form" />
                 <h3 className="checklist-qty-form-header" style={{color: `${activeHabit.color}`}}>{activeHabit.name}</h3>
                 <label className="checklist-qty-form-label" style={{background: `${activeHabit.color}25`}}>
                 <input ref={newAmt} type="number" placeholder="Add Amount" className="global-input" />
