@@ -10,6 +10,11 @@ export default function EditHabitForm({ habit, updateHabit, deleteHabit, closeEd
   const [habitColor, setHabitColor] = useState("");
   const goalInput = useRef();
 
+  function handleCloseEditForm() {
+    closeEditForm()
+  }
+
+// Handle color update
   function openColorInput(e) {
     e.preventDefault();
     setColorInputActive(true)
@@ -24,27 +29,27 @@ export default function EditHabitForm({ habit, updateHabit, deleteHabit, closeEd
     closeColorInput()
   }
 
-  function handleCloseEditForm() {
-    closeEditForm()
-  }
-
+// Update habit details
   function handleUpdateHabit() {
     let newName;
     let newColor;
     let newGoal;
 
+    // check if name changed, update if so
     if(!nameInput.current.value || nameInput.current.value == habit.name) {
       newName = habit.name;
     } else if (nameInput.current.value !== habit.name){
       newName = nameInput.current.value;
     }
 
+    // check if color changed, update if so
     if(!habitColor || habitColor == habit.color) {
       newColor = habit.color;
     } else if (habitColor !== habit.color){
       newColor = habitColor;
     }
 
+    // check if quantity changed, update if so
     if(habit.type === "quantity") {
       if(!goalInput.current.value || goalInput.current.value == habit.goalAmt) {
         newGoal = habit.goalAmt;
@@ -72,17 +77,17 @@ export default function EditHabitForm({ habit, updateHabit, deleteHabit, closeEd
           </div>
 
           {
-            habit.type === "quantity" && (
+            habit.type === "quantity" ? (
                 <label className="qty-edit-label">
                   Goal: 
                   <input ref={goalInput} placeholder={habit.goalAmt} className="global-input" />
                 </label>
-            )
+            ) : null
           }
         </div>
         
         {
-          colorInputActive && <ColorInput closeColorInput={closeColorInput} setSelectedColor={setSelectedColor} />
+          colorInputActive ? <ColorInput closeColorInput={closeColorInput} setSelectedColor={setSelectedColor} /> : null
         }
 
         <div className="edit-btns">

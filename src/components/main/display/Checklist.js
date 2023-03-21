@@ -8,6 +8,7 @@ export default function Checklist({ currentDay, completeHabit, updateHabitQuanti
     const [ activeHabit, setActiveHabit ] = useState({})
     const newAmt = useRef();
     
+    // complete habit if type = "check", open quantity update form if type = "quantity"
     function handleUpdateRecord(updatedHabit) {
         if(updatedHabit.type === "check") {
             completeHabit(updatedHabit)
@@ -17,6 +18,7 @@ export default function Checklist({ currentDay, completeHabit, updateHabitQuanti
         }
     }
 
+    // on submit, update quantity amount for selected habit
     function handleUpdateHabitQuantity(e) {
         e.preventDefault();
         if(newAmt.current.value) {
@@ -35,13 +37,11 @@ export default function Checklist({ currentDay, completeHabit, updateHabitQuanti
         }
 
         <button onClick={() => toggleStreaks()} className="checklist-streak-btn">
-            {
-                streaksActive ? "Close" : "Streaks"
-            }
+            { streaksActive ? "Close" : "Streaks"}
         </button>
 
         {
-            quantityFormActive && (
+            quantityFormActive ? (
             <form className="checklist-qty-form">
                 <CloseBtn closeFunction={() => setQuantityFormActive(false)} ariaLabel="Close quantity update form" />
                 <h3 className="checklist-qty-form-header" style={{color: `${activeHabit.color}`}}>{activeHabit.name}</h3>
@@ -50,7 +50,7 @@ export default function Checklist({ currentDay, completeHabit, updateHabitQuanti
                 / {activeHabit.goal.goalAmt}
                 </label>
                 <button onClick={handleUpdateHabitQuantity} className="global-submit-btn">Update</button>
-            </form>)
+            </form>) : null
         }
     </StyledChecklist>
   )
