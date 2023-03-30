@@ -230,7 +230,7 @@ function App() {
 // UPDATE STREAKS AT END OF DAY (IF HABIT NOT COMPLETED, RESET CURRENT STREAK)
   useEffect(() => {
 
-    if(records.length > 0 && habits.length > 0) {
+    if(records.length > 1 && habits.length > 0) {
       const checkedHabits = [...habits];
       const prevDayHabits = records[1].habits;
   

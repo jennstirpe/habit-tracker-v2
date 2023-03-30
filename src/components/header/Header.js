@@ -7,7 +7,7 @@ export default function Header({ colorTheme, toggleTheme }) {
     <StyledHeader>
         <ThemeToggler toggleTheme={toggleTheme} colorTheme={colorTheme} />
         
-        <h1>Habit Tracker</h1>
+        <h1>HabiTracker</h1>
 
     </StyledHeader>
   )

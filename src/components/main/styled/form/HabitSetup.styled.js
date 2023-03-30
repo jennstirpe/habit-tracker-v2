@@ -150,6 +150,7 @@ export const StyledHabitSetup = styled.section`
                 height: 3rem;
                 width: 5.75rem;
                 margin-bottom: .5rem;
+                font-size: 1rem;
             }
         }
 
